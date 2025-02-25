@@ -20,6 +20,7 @@ module.exports = {
   },
   basePath: isProd ? "/portfolio" : "",
   assetPrefix: isProd ? "/portfolio/" : "",
-  output: "export", // Enables static exports
+  output: "export",
+  trailingSlash: true, 
   reactStrictMode: true,
 };
