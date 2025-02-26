@@ -1,33 +1,55 @@
-name: Triển khai Next.js lên GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches:
-      - main  
+      - main
+
+permissions:
+  contents: write
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_BASE_PATH: /minhhau32223.github.io
+
     steps:
-      - name: Checkout mã nguồn
-        uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v3
 
-      - name: Cài đặt Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: '18' 
+          node-version: "18"
+          cache: "npm"
 
-      - name: Cài đặt các phụ thuộc
-        run: npm install
+      - name: Install dependencies
+        run: |
+          npm ci
+          npm cache verify
 
-      - name: Xây dựng và xuất bản ứng dụng
-        run: npm run deploy
+      - name: Check Next.js Cache
+        run: |
+          npm run build
+          if [ ! -d ".next" ]; then
+            echo "Next.js build cache not found"
+            exit 1
+          fi
 
-      - name: Triển khai lên GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Build
+        run: |
+          rm -rf out/
+          npm run build
+          touch out/.nojekyll
+          echo "minhhau32223.github.io" > out/CNAME
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./out
-        
-
-
+          folder: out
+          branch: gh-pages
+          clean: true
+          clean-exclude: |
+            .nojekyll
+            CNAME
