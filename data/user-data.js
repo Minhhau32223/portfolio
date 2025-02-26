@@ -8,6 +8,6 @@ export const userData = {
   stackOverflow: 'https://stackoverflow.com/users/29795644/hau-nguyen',
   leetcode: "https://leetcode.com/u/vENMftlEpd/",
   resume: "https://drive.google.com/file/d/1eyutpKFFhJ9X-qpQGKhUNnVRkB5Wer00/view?usp=sharing",
-  skills: ['React', 'ASP.net',  'Express', 'NestJS', 'MySql', 'SQL Server', 'Postgres', 'Django', 'AWS'],
+  skills: ['React', 'Asp.net',  'Java', 'PHP', 'MySql', 'SQL Server', 'Postgres', 'Django', 'AWS'],
   timezone: '+7'
 };
