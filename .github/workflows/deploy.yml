@@ -3,7 +3,7 @@ name: Triển khai Next.js lên GitHub Pages
 on:
   push:
     branches:
-      - main  # Thay 'main' bằng nhánh chính của bạn nếu khác
+      - main  
 
 jobs:
   build-and-deploy:
@@ -15,7 +15,7 @@ jobs:
       - name: Cài đặt Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '14'  # Hoặc phiên bản Node.js bạn đang sử dụng
+          node-version: '18' 
 
       - name: Cài đặt các phụ thuộc
         run: npm install
